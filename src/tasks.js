@@ -112,7 +112,7 @@ const createTaskCard = (task) => {
     taskCardContent.addEventListener('click', (e) => {
         e.preventDefault();
         setActiveId(task.id);
-        window.location = '/detail.html'
+        window.location = './detail.html'
     });
     taskCard.appendChild(taskCardContent);
 
