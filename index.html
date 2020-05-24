@@ -40,39 +40,123 @@
   </div>
 </nav>
 
-  <section class="hero is-medium is-primary">
-    <div class="hero-body">
-      <h1 class="title">
-        Hello World
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <form class="level is-mobile">
-        <input id="task-entry" class="input is-primary is-large" type="text" placeholder="Enter your task here...">
-        <input type="submit" id="task-submit" class="button is-primary is-large has-margin-left"></input>
-      </form>
-
-      <div id="task-container">
+<section class="hero is-large">
+  <div id="carousel" class="has-text-white">
+    <div id="carousel-0" class="carousel-slide fade active">
+      <img class="carousel-image" src="./assets/carousel-0.jpg"/>
+      <div class="carousel-content">
+        <div class="container carousel-container">
+          <div class="is-row">
+            <span class="icon is-large">
+              <i class="fas fa-hammer fa-3x"></i>
+            </span>
+            <h1 class="main-title title">Taskmaster</h1>
+          </div>
+          <h1 class="subtitle main-subtitle has-margin-top is-4">Organizing your daily life, to enable you to...</h1>
+        </div>
       </div>
     </div>
-  </section>
-
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        <strong>Taskmaster</strong> is made by <a href="https://davidli.io">David Li</a>.
-      </p>
-      <p>
-        All images from <a href="https://unsplash.com">Unsplash</a> - thank you for all the images over the years!
-      </p>
+    <div id="carousel-1" class="carousel-slide fade hidden">
+      <img class="carousel-image" src="assets/carousel-1.jpg"/>
+      <div class="carousel-content">
+        <div class="container carousel-container">
+          <div class="is-row">
+            <span class="icon is-large">
+              <i class="fas fa-hammer fa-3x"></i>
+            </span>
+            <h1 class="main-title title">Taskmaster</h1>
+          </div>
+          <h1 class="subtitle main-subtitle has-margin-top is-4">...work more effectively and get things done..</h1>
+        </div>
+      </div>
     </div>
-  </footer>
+    <div id="carousel-2" class="carousel-slide fade hidden">
+      <img class="carousel-image" src="assets/carousel-2.jpg"/>
+      <div class="carousel-content">
+        <div class="container carousel-container">
+          <div class="is-row">
+            <span class="icon is-large">
+              <i class="fas fa-hammer fa-3x"></i>
+            </span>
+            <h1 class="main-title title">Taskmaster</h1>
+          </div>
+          <h1 class="subtitle main-subtitle has-margin-top is-4">...unlock your potential and your time..</h1>
+        </div>
+      </div>
+    </div>
+    <div id="carousel-3" class="carousel-slide fade hidden">
+      <img class="carousel-image" src="assets/carousel-3.jpg"/>
+      <div class="carousel-content">
+        <div class="container carousel-container">
+          <div class="is-row">
+            <span class="icon is-large">
+              <i class="fas fa-hammer fa-3x"></i>
+            </span>
+            <h1 class="main-title title">Taskmaster</h1>
+          </div>
+          <h1 class="subtitle main-subtitle has-margin-top is-4">...to do the things that <strong class="main-subtitle">you</strong> care about most.</h1>
+        </div>
+      </div>
+    </div>
+
+    <a id="carousel-left" class="carousel-nav">
+        <span class="icon is-large">
+          <i class="fas fa-chevron-left fa-2x"></i>
+        </span>
+    </a>
+    <a id="carousel-right" class="carousel-nav">
+        <span class="icon is-large">
+          <i class="fas fa-chevron-right fa-2x"></i>
+        </span>
+    </a>
+
+    <div class="carousel-row">
+      <a class="carousel-nav carousel-jump">
+        <span class="icon is-medium">
+          <i class="fas fa-circle fa-lg"></i>
+        </span>
+      </a>
+      <a class="carousel-nav carousel-jump">
+        <span class="icon is-medium">
+          <i class="far fa-circle fa-lg"></i>
+        </span>
+      </a>
+      <a class="carousel-nav carousel-jump">
+        <span class="icon is-medium">
+          <i class="far fa-circle fa-lg"></i>
+        </span>
+      </a>
+      <a class="carousel-nav carousel-jump">
+        <span class="icon is-medium">
+          <i class="far fa-circle fa-lg"></i>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <form class="level is-mobile">
+      <input id="task-entry" class="input is-primary is-large" type="text" placeholder="Enter your task here...">
+      <input type="submit" value="Add" id="task-submit" class="button is-primary is-large has-margin-left"/>
+    </form>
+
+    <div id="task-container">
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Taskmaster</strong> is made by <a href="https://davidli.io">David Li</a>.
+    </p>
+    <p>
+      All images from <a href="https://unsplash.com">Unsplash</a> - thank you for all the images over the years!
+    </p>
+  </div>
+</footer>
 <script src="https://kit.fontawesome.com/a7c195fea2.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.27/dayjs.min.js"></script>
 <script type="text/javascript" src="./src/nav.js"></script>

@@ -118,7 +118,7 @@ const createTaskCard = (task) => {
 
     const taskCardIconContainer = document.createElement('a');
     taskCardIconContainer.classList.add('icon');
-    taskCardIconContainer.classList.add('is-medium');
+    taskCardIconContainer.classList.add('is-large');
     taskCardIconContainer.classList.add(task.completed ? 'has-text-primary' : 'has-text-grey');
     taskCardIconContainer.classList.add('card-icon');
     taskCardIconContainer.setAttribute('role', 'button');
