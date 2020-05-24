@@ -24,3 +24,13 @@
   align-items: center;
   flex-direction: column;
 }
+
+.card-content {
+  flex-direction: row;
+  display: flex;
+}
+
+.card-icon {
+  margin-top: 0.125rem;
+  margin-right: 0.25rem;
+}

@@ -6,11 +6,15 @@ const getTasks = () => {
         const tasks = JSON.parse(rawTasks);
         if (!tasks) return [];
         return tasks;
-    } catch (e) {
+    } catch (error) {
         // handle non-JSON tasks by resetting localStorage
         window.localStorage.setItem('tasks', JSON.stringify([]));
         return [];
     }
+};
+
+const saveTasks = (tasks) => {
+    window.localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
 const createTask = (e) => {
@@ -27,12 +31,17 @@ const createTask = (e) => {
     };
     const tasks = [...getTasks(), newTask];
     taskEntry.value = '';
-    window.localStorage.setItem('tasks', JSON.stringify(tasks));
+    saveTasks(tasks);
 };
 
-const setActiveTask = () => {
-
+const getActiveId = () => {
+    return window.localStorage.getItem('taskId');
 };
+
+const setActiveId = (id) => {
+    return window.localStorage.setItem('taskId', id);
+};
+
 
 const getActiveTask = () => {
 
@@ -42,16 +51,69 @@ const updateActiveTask = () => {
 
 };
 
+const completeActiveTask = (id) => {
+    if (!id) {
+        id = getActiveId();
+    }
+
+    const tasks = getTasks();
+    for (const index in tasks) {
+        if (tasks[index].id === id) {
+            const newTask = {
+                ...tasks[index],
+                completed: !tasks[index].completed,
+            };
+            tasks[index] = newTask;
+            break;
+        }
+    }
+    saveTasks(tasks);
+
+    try {
+        updateTaskContainer(tasks);
+    } catch(error) {
+        // handle detail page errors
+    }
+
+    try {
+        updateDetailPage(tasks);
+    } catch(error) {
+        // handle detail page errors
+    }
+};
+
 const createTaskCard = (task) => {
     const taskCard = document.createElement('div');
     taskCard.classList.add('card');
     taskCard.classList.add('has-margin-bottom');
+    taskCard.setAttribute('id', task.id);
+
     const taskCardContent = document.createElement('div');
     taskCardContent.classList.add('card-content');
     taskCard.appendChild(taskCardContent);
+
+    const taskCardIconContainer = document.createElement('a');
+    taskCardIconContainer.classList.add('icon');
+    taskCardIconContainer.classList.add('is-medium');
+    taskCardIconContainer.classList.add(task.completed ? 'has-text-primary' : 'has-text-grey');
+    taskCardIconContainer.classList.add('card-icon');
+    taskCardIconContainer.setAttribute('role', 'button');
+    taskCardIconContainer.addEventListener('click', (e) => {
+        e.preventDefault();
+        completeActiveTask(task.id);
+    });
+
+    const taskCardChecked = document.createElement('i');
+    taskCardChecked.classList.add('far');
+    taskCardChecked.classList.add('fa-lg');
+    taskCardChecked.classList.add(task.completed ? 'fa-check-square' : 'fa-square');
+    taskCardIconContainer.appendChild(taskCardChecked);
+
     const taskCardTitle = document.createElement('p');
     taskCardTitle.classList.add('title');
     taskCardTitle.innerHTML = task.text;
+
+    taskCardContent.appendChild(taskCardIconContainer);
     taskCardContent.appendChild(taskCardTitle);
 
     return taskCard;
@@ -95,5 +157,6 @@ window.tasks = {
     },
     updateActiveTask: (id) => {
     },
+    completeActiveTask,
     updateTaskContainer,
 };
