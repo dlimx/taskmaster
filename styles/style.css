@@ -1,12 +1,26 @@
-.navTitle {
+.nav-title {
   font-weight: bold;
-  color: white;
   margin-left: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   font-size: 1.6rem;
 }
 
-.navIcon {
+.has-margin-left {
+  margin-left: 1rem;
+}
 
+.has-margin-bottom {
+  margin-bottom: 1rem;
+}
+
+#task-container {
+  padding: 2rem 0;
+}
+
+.task-container-empty {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
