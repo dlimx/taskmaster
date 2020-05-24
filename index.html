@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="icon" type="image/png" href="./assets/favicon.ico">
 </head>
-<body>
 
-<nav class="navbar is-primary is-spaced" role="navigation" aria-label="main-navigation">
+<body class="page-container has-spaced-navbar-fixed-top">
+<nav class="navbar is-fixed-top is-primary is-spaced" role="navigation" aria-label="main-navigation">
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="./index.html">
@@ -40,39 +40,39 @@
   </div>
 </nav>
 
-<section class="hero is-medium is-primary">
-  <div class="hero-body">
-    <h1 class="title">
-      Hello World
-    </h1>
-    <p class="subtitle">
-      My first website with <strong>Bulma</strong>!
-    </p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <form class="level is-mobile">
-      <input id="task-entry" class="input is-primary is-large" type="text" placeholder="Enter your task here...">
-      <input type="submit" id="task-submit" class="button is-primary is-large has-margin-left"></input>
-    </form>
-
-    <div id="task-container">
+  <section class="hero is-medium is-primary">
+    <div class="hero-body">
+      <h1 class="title">
+        Hello World
+      </h1>
+      <p class="subtitle">
+        My first website with <strong>Bulma</strong>!
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      <strong>Taskmaster</strong> is made by <a href="https://davidli.io">David Li</a>.
-    </p>
-    <p>
-      All images from <a href="https://unsplash.com">Unsplash</a> - thank you for all the images over the years!
-    </p>
-  </div>
-</footer>
+  <section class="section">
+    <div class="container">
+      <form class="level is-mobile">
+        <input id="task-entry" class="input is-primary is-large" type="text" placeholder="Enter your task here...">
+        <input type="submit" id="task-submit" class="button is-primary is-large has-margin-left"></input>
+      </form>
+
+      <div id="task-container">
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Taskmaster</strong> is made by <a href="https://davidli.io">David Li</a>.
+      </p>
+      <p>
+        All images from <a href="https://unsplash.com">Unsplash</a> - thank you for all the images over the years!
+      </p>
+    </div>
+  </footer>
 <script src="https://kit.fontawesome.com/a7c195fea2.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.27/dayjs.min.js"></script>
 <script type="text/javascript" src="./src/nav.js"></script>
