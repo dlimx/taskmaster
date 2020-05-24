@@ -1,6 +1,7 @@
-const TASK_CONTAINER_EMPTY = 'task-container-empty';
+const SERVER_ROOT = 'https://cors-anywhere.herokuapp.com/http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php';
 
 const getTasks = () => {
+    // TODO - move to server side
     const rawTasks = window.localStorage.getItem('tasks');
     try {
         const tasks = JSON.parse(rawTasks);
@@ -14,6 +15,7 @@ const getTasks = () => {
 };
 
 const saveTasks = (tasks) => {
+    // TODO - move to server side
     window.localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
@@ -31,6 +33,16 @@ const createTask = (e) => {
         created: Date.now(),
         updated: Date.now(),
     };
+
+    fetch(SERVER_ROOT, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newTask),
+    }).then(data => console.log(data)).catch(console.error);
+
     const tasks = [...getTasks(), newTask];
     taskEntry.value = '';
     saveTasks(tasks);
@@ -76,13 +88,13 @@ const completeActiveTask = (id) => {
 
     try {
         updateTaskContainer(tasks);
-    } catch(error) {
+    } catch (error) {
         // handle detail page errors
     }
 
     try {
         updateDetailPage(tasks);
-    } catch(error) {
+    } catch (error) {
         // handle detail page errors
     }
 };
@@ -143,6 +155,7 @@ const createTaskCard = (task) => {
 
 const updateTaskContainer = (tasks) => {
     const taskContainer = document.querySelector('#task-container');
+    const TASK_CONTAINER_EMPTY = 'task-container-empty';
 
     // reset the container so we're not duplicating
     taskContainer.innerHTML = '';
