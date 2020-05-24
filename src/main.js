@@ -2,10 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const asyncCreateTask = (e) => {
         window.tasks.createTask(e);
 
-        console.log('hi')
-
-        const tasks = window.tasks.getTasks();
-        window.tasks.updateTaskContainer(tasks);
+        const newTasks = window.tasks.getTasks();
+        window.tasks.updateTaskContainer(newTasks);
 
     };
 

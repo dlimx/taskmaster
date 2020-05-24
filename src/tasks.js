@@ -28,6 +28,8 @@ const createTask = (e) => {
         id: Math.floor(Math.random() * 100000),
         text: taskEntry.value,
         completed: false,
+        created: Date.now(),
+        updated: Date.now(),
     };
     const tasks = [...getTasks(), newTask];
     taskEntry.value = '';
@@ -35,20 +37,22 @@ const createTask = (e) => {
 };
 
 const getActiveId = () => {
-    return window.localStorage.getItem('taskId');
+    const id = window.localStorage.getItem('taskId');
+    if (id) {
+        return id;
+    }
+
+    const tasks = getTasks();
+    if (tasks.length) {
+        setActiveId(tasks[0].id);
+        return tasks[0].id;
+    }
+
+    window.location = '/';
 };
 
 const setActiveId = (id) => {
     return window.localStorage.setItem('taskId', id);
-};
-
-
-const getActiveTask = () => {
-
-};
-
-const updateActiveTask = () => {
-
 };
 
 const completeActiveTask = (id) => {
@@ -62,6 +66,7 @@ const completeActiveTask = (id) => {
             const newTask = {
                 ...tasks[index],
                 completed: !tasks[index].completed,
+                updated: Date.now(),
             };
             tasks[index] = newTask;
             break;
@@ -88,8 +93,15 @@ const createTaskCard = (task) => {
     taskCard.classList.add('has-margin-bottom');
     taskCard.setAttribute('id', task.id);
 
-    const taskCardContent = document.createElement('div');
+    const taskCardContent = document.createElement('a');
     taskCardContent.classList.add('card-content');
+    taskCardContent.classList.add('is-row');
+    taskCardContent.setAttribute('role', 'button');
+    taskCardContent.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveId(task.id);
+        window.location = '/detail.html'
+    });
     taskCard.appendChild(taskCardContent);
 
     const taskCardIconContainer = document.createElement('a');
@@ -100,6 +112,7 @@ const createTaskCard = (task) => {
     taskCardIconContainer.setAttribute('role', 'button');
     taskCardIconContainer.addEventListener('click', (e) => {
         e.preventDefault();
+        e.stopPropagation();
         completeActiveTask(task.id);
     });
 
@@ -109,12 +122,21 @@ const createTaskCard = (task) => {
     taskCardChecked.classList.add(task.completed ? 'fa-check-square' : 'fa-square');
     taskCardIconContainer.appendChild(taskCardChecked);
 
+    const taskCardCopyContainer = document.createElement('div');
+
     const taskCardTitle = document.createElement('p');
     taskCardTitle.classList.add('title');
     taskCardTitle.innerHTML = task.text;
 
+    const taskCardDate = document.createElement('p');
+    taskCardDate.classList.add('subtitle');
+    taskCardDate.innerHTML = dayjs(task.created).format('MMMM DD');
+
+    taskCardCopyContainer.appendChild(taskCardTitle);
+    taskCardCopyContainer.appendChild(taskCardDate);
+
     taskCardContent.appendChild(taskCardIconContainer);
-    taskCardContent.appendChild(taskCardTitle);
+    taskCardContent.appendChild(taskCardCopyContainer);
 
     return taskCard;
 };
@@ -122,8 +144,10 @@ const createTaskCard = (task) => {
 const updateTaskContainer = (tasks) => {
     const taskContainer = document.querySelector('#task-container');
 
+    // reset the container so we're not duplicating
+    taskContainer.innerHTML = '';
+
     if (!tasks || !tasks.length) {
-        taskContainer.innerHTML = '';
         taskContainer.classList.add(TASK_CONTAINER_EMPTY);
 
         const getStarted = document.createElement('h1');
@@ -139,7 +163,6 @@ const updateTaskContainer = (tasks) => {
         return;
     }
 
-    taskContainer.innerHTML = '';
     taskContainer.classList.remove(TASK_CONTAINER_EMPTY);
 
     for (const task of tasks) {
@@ -148,15 +171,67 @@ const updateTaskContainer = (tasks) => {
     }
 };
 
+const updateDetailPage = (tasks) => {
+    const id = getActiveId();
+    const task = tasks.filter(item => item.id === Number(id))[0];
+
+    // reset the container so we're not duplicating
+    const taskTitleContainer = document.querySelector('#task-title');
+    taskTitleContainer.innerHTML = '';
+    const taskDetailsContainer = document.querySelector('#task-body');
+    taskDetailsContainer.innerHTML = '';
+
+    const taskContent = document.createElement('div');
+    taskContent.classList.add('is-row');
+    taskTitleContainer.appendChild(taskContent);
+
+    const taskIconContainer = document.createElement('a');
+    taskIconContainer.classList.add('icon');
+    taskIconContainer.classList.add('is-large');
+    taskIconContainer.classList.add(task.completed ? 'has-text-primary' : 'has-text-grey');
+    taskIconContainer.classList.add('detail-icon');
+    taskIconContainer.setAttribute('role', 'button');
+    taskIconContainer.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        completeActiveTask(task.id);
+    });
+
+    const taskChecked = document.createElement('i');
+    taskChecked.classList.add('far');
+    taskChecked.classList.add('fa-2x');
+    taskChecked.classList.add(task.completed ? 'fa-check-square' : 'fa-square');
+    taskIconContainer.appendChild(taskChecked);
+
+    const taskTitle = document.createElement('p');
+    taskTitle.classList.add('title');
+    taskTitle.classList.add('is-2');
+    taskTitle.innerHTML = task.text;
+
+    taskContent.appendChild(taskIconContainer);
+    taskContent.appendChild(taskTitle);
+
+    const taskCreated = document.createElement('p');
+    taskCreated.classList.add('subtitle');
+    taskCreated.classList.add('is-4');
+    taskCreated.innerHTML = dayjs(task.created).format('[Created on] MMMM DD [at] h:mma');
+
+    const taskUpdated = document.createElement('p');
+    taskUpdated.classList.add('subtitle');
+    taskUpdated.classList.add('is-4');
+    taskUpdated.innerHTML = dayjs(task.updated).format('[Last updated on] MMMM DD [at] h:mma');
+
+
+    taskDetailsContainer.appendChild(taskCreated)
+    taskDetailsContainer.appendChild(taskUpdated)
+};
+
 window.tasks = {
     getTasks,
     createTask,
-    setActiveTask: (id) => {
-    },
-    getActiveTask: (id) => {
-    },
-    updateActiveTask: (id) => {
-    },
+    setActiveId,
+    getActiveId,
     completeActiveTask,
     updateTaskContainer,
+    updateDetailPage,
 };

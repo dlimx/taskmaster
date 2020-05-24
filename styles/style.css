@@ -25,7 +25,7 @@
   flex-direction: column;
 }
 
-.card-content {
+.is-row {
   flex-direction: row;
   display: flex;
 }
@@ -33,4 +33,9 @@
 .card-icon {
   margin-top: 0.125rem;
   margin-right: 0.25rem;
+}
+
+.detail-icon {
+  margin-top: 0.0625rem;
+  margin-right: 0.5rem;
 }
