@@ -1,0 +1,19 @@
+{
+  "name": "taskmaster",
+  "version": "0.1.4",
+  "description": "Organize your life with Taskmaster",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlimx/taskmaster.git"
+  },
+  "author": "David Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dlimx/taskmaster/issues"
+  },
+  "homepage": "https://dlimx.github.io/taskmaster"
+}

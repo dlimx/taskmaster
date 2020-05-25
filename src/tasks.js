@@ -138,10 +138,12 @@ const createTaskCard = (task) => {
 
     const taskCardTitle = document.createElement('p');
     taskCardTitle.classList.add('title');
+    taskCardTitle.classList.add('is-4');
     taskCardTitle.innerHTML = task.text;
 
     const taskCardDate = document.createElement('p');
     taskCardDate.classList.add('subtitle');
+    taskCardDate.classList.add('is-6');
     taskCardDate.innerHTML = dayjs(task.created).format('MMMM DD');
 
     taskCardCopyContainer.appendChild(taskCardTitle);
@@ -234,12 +236,12 @@ const updateDetailPage = (tasks) => {
 
     const taskCreated = document.createElement('p');
     taskCreated.classList.add('subtitle');
-    taskCreated.classList.add('is-4');
+    taskCreated.classList.add('is-5');
     taskCreated.innerHTML = dayjs(task.created).format('[Created on] MMMM DD [at] h:mma');
 
     const taskUpdated = document.createElement('p');
     taskUpdated.classList.add('subtitle');
-    taskUpdated.classList.add('is-4');
+    taskUpdated.classList.add('is-5');
     taskUpdated.innerHTML = dayjs(task.updated).format('[Last updated on] MMMM DD [at] h:mma');
 
 
