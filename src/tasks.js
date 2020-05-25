@@ -182,6 +182,14 @@ const updateTaskContainer = (tasks) => {
         const card = createTaskCard(task);
         taskContainer.append(card);
     }
+
+    try {
+        const completed = tasks.filter(task => !!task.completed).length;
+        const taskCount = document.querySelector('#task-count');
+        taskCount.innerHTML = `${completed} task${completed === 1 ? '' : 's'}`;
+    } catch (error) {
+        // handling for non-details page
+    }
 };
 
 const updateDetailPage = (tasks) => {
