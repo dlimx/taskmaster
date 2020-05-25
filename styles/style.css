@@ -9,7 +9,7 @@ body {
 .page-container {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 12rem;
+  padding-bottom: 16rem;
 }
 
 .nav-title {
@@ -80,7 +80,7 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-  height: 12rem;
+  height: 16rem;
 }
 
 #carousel {
@@ -123,14 +123,14 @@ body {
 
 #carousel-left {
   position: absolute;
-  left: 4rem;
-  bottom: 4rem;
+  left: 3rem;
+  bottom: 3rem;
 }
 
 #carousel-right {
   position: absolute;
-  right: 4rem;
-  bottom: 4rem;
+  right: 3rem;
+  bottom: 3rem;
 }
 
 .carousel-nav {
@@ -146,7 +146,7 @@ body {
 
 .carousel-row {
   position: absolute;
-  bottom: 4.25rem;
+  bottom: 3.5rem;
   right: 10rem;
 }
 
@@ -156,6 +156,7 @@ body {
   justify-content: flex-end;
   height: 100%;
   padding: 3rem 0;
+  width: 60%;
 }
 
 .fade {
@@ -179,4 +180,37 @@ body {
   height: 200px;
   width: 100%;
   overflow: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+  .carousel-container {
+    justify-content: flex-start;
+    padding-top: 10rem;
+  }
+
+  .carousel-content {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.4) 100%);
+  }
+
+  #carousel-left {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+  }
+
+  .carousel-row {
+    position: absolute;
+    left: 50%;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    transform: translateX(-50%);
+    bottom: 1.5rem;
+  }
+
+  #carousel-right {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+  }
 }

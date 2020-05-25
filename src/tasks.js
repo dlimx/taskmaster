@@ -1,3 +1,4 @@
+// TODO - update to use AWS
 const SERVER_ROOT = 'https://cors-anywhere.herokuapp.com/http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php';
 
 const getTasks = () => {
@@ -158,11 +159,20 @@ const createTaskCard = (task) => {
 const updateTaskContainer = (tasks) => {
     const taskContainer = document.querySelector('#task-container');
     const TASK_CONTAINER_EMPTY = 'task-container-empty';
+    const hasTasks = tasks && tasks.length;
+
+    try {
+        const completed = hasTasks ? tasks.filter(task => !!task.completed).length : 0;
+        const taskCount = document.querySelector('#task-count');
+        taskCount.innerHTML = `${completed} task${completed === 1 ? '' : 's'}`;
+    } catch (error) {
+        // handling for non-details page
+    }
 
     // reset the container so we're not duplicating
     taskContainer.innerHTML = '';
 
-    if (!tasks || !tasks.length) {
+    if (!hasTasks) {
         taskContainer.classList.add(TASK_CONTAINER_EMPTY);
 
         const getStarted = document.createElement('h1');
@@ -183,14 +193,6 @@ const updateTaskContainer = (tasks) => {
     for (const task of tasks) {
         const card = createTaskCard(task);
         taskContainer.append(card);
-    }
-
-    try {
-        const completed = tasks.filter(task => !!task.completed).length;
-        const taskCount = document.querySelector('#task-count');
-        taskCount.innerHTML = `${completed} task${completed === 1 ? '' : 's'}`;
-    } catch (error) {
-        // handling for non-details page
     }
 };
 
@@ -244,9 +246,8 @@ const updateDetailPage = (tasks) => {
     taskUpdated.classList.add('is-5');
     taskUpdated.innerHTML = dayjs(task.updated).format('[Last updated on] MMMM DD [at] h:mma');
 
-
-    taskDetailsContainer.appendChild(taskCreated)
-    taskDetailsContainer.appendChild(taskUpdated)
+    taskDetailsContainer.appendChild(taskCreated);
+    taskDetailsContainer.appendChild(taskUpdated);
 };
 
 window.tasks = {
