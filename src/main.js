@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     let activeCarouselIndex = 0;
+    let interacted = false;
 
     const carouselIcons = document.querySelectorAll('.carousel-jump');
     carouselIcons.forEach((item, index) => {
@@ -42,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             activateCarouselIndex(activeCarouselIndex, index);
             activeCarouselIndex = index;
+            interacted = true;
+            clearTimeout(autoScroll);
         });
     });
 
@@ -50,11 +53,21 @@ document.addEventListener('DOMContentLoaded', () => {
         let nextIndex = activeCarouselIndex - 1 >= 0 ? activeCarouselIndex - 1 : carouselIcons.length - 1;
         activateCarouselIndex(activeCarouselIndex, nextIndex);
         activeCarouselIndex = nextIndex;
+        interacted = true;
+        clearTimeout(autoScroll);
     });
     const carouselRight = document.querySelector('#carousel-right');
     carouselRight.addEventListener('click', (e) => {
         let nextIndex = activeCarouselIndex + 1 < carouselIcons.length ? activeCarouselIndex + 1 : 0;
         activateCarouselIndex(activeCarouselIndex, nextIndex);
         activeCarouselIndex = nextIndex;
+        interacted = true;
+        clearTimeout(autoScroll);
     });
+
+    let autoScroll = setInterval(() => {
+        let nextIndex = activeCarouselIndex + 1 < carouselIcons.length ? activeCarouselIndex + 1 : 0;
+        activateCarouselIndex(activeCarouselIndex, nextIndex);
+        activeCarouselIndex = nextIndex;
+    }, 5000);
 });
